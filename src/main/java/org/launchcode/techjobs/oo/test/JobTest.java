@@ -25,16 +25,12 @@ import static org.junit.Assert.assertFalse;
 public class JobTest {
     Job test_job1;
     Job test_job2;
-    Job test_job_all;
-    Job test_job_all2;
+
 
     @Before
     public void createJobObject(){
         test_job1 = new Job();
         test_job2 = new Job();
-        test_job_all = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-        test_job_all2 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-
     }
 
     @Test
@@ -44,6 +40,8 @@ public class JobTest {
 
     @Test
     public void testJobConstructorSetsAllFields(){
+        Job test_job_all = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+
         assertTrue(test_job_all.getName() instanceof String);
         assertTrue(test_job_all.getEmployer() instanceof Employer);
         assertTrue(test_job_all.getLocation() instanceof Location);
@@ -51,15 +49,19 @@ public class JobTest {
         assertTrue(test_job_all.getCoreCompetency() instanceof CoreCompetency);
 
         assertEquals(test_job_all.getName(), "Product tester");
-        assertEquals(test_job_all.getEmployer(), "ACME");
-        assertEquals(test_job_all.getLocation(), "Desert");
-        assertEquals(test_job_all.getPositionType(), "Quality control");
-        assertEquals(test_job_all.getCoreCompetency(), "Persistence");
+        assertEquals(test_job_all.getEmployer().getValue(), "ACME");
+        assertEquals(test_job_all.getLocation().getValue(), "Desert");
+        assertEquals(test_job_all.getPositionType().getValue(), "Quality control");
+        assertEquals(test_job_all.getCoreCompetency().getValue(), "Persistence");
     }
 
     @Test
      public void testJobsForEquality(){
-        assertNotEquals(test_job_all,test_job_all2);
+        Job test_job_all = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+       Job test_job_all2 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+
+
+        assertFalse(test_job_all.equals(test_job_all2 ));
     }
 
 }
