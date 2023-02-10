@@ -23,18 +23,11 @@ import static org.junit.Assert.assertFalse;
  */
 @RunWith(JUnit4.class)
 public class JobTest {
-    Job test_job1;
-    Job test_job2;
-
-
-    @Before
-    public void createJobObject(){
-        test_job1 = new Job();
-        test_job2 = new Job();
-    }
 
     @Test
     public void testSettingJobId(){
+        Job test_job1 = new Job();
+        Job test_job2 = new Job();
         assertNotEquals(test_job1,test_job2);
     }
 
@@ -63,5 +56,42 @@ public class JobTest {
 
         assertFalse(test_job_all.equals(test_job_all2 ));
     }
+
+    @Test
+    public void testToStringStartsAndEndsWithNewLine(){
+        Job test_job_all = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+
+        assertEquals(test_job_all.toString().charAt(0),'\n');
+        assertEquals(test_job_all.toString().charAt(test_job_all.toString().length()-1),'\n');
+
+    }
+
+    @Test
+    public void testToStringContainsCorrectLabelsAndData(){
+        Job test_job_all = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+
+        assertEquals(test_job_all.toString(), "\n"+"ID: " + test_job_all.getId() + "\n" +
+                "Name: Product tester" + "\n" +
+                "Employer: ACME" + "\n" +
+                "Location: Desert" + "\n" +
+                "Position Type: Quality control" + "\n" +
+                "Core Competency: Persistence" + "\n");
+
+    }
+
+    @Test
+    public void testToStringHandlesEmptyField(){
+        Job test_job_missingInfo = new Job("", new Employer(""), new Location(""), new PositionType(""), new CoreCompetency(""));
+
+        assertEquals(test_job_missingInfo.toString(), "\n"+"ID: " + test_job_missingInfo.getId() + "\n" +
+                "Name: Data not available" + "\n" +
+                "Employer: Data not available" + "\n" +
+                "Location: Data not available" + "\n" +
+                "Position Type: Data not available" + "\n" +
+                "Core Competency: Data not available" + "\n");
+
+    }
+
+
 
 }
