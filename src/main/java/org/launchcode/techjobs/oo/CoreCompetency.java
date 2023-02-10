@@ -2,8 +2,9 @@ package org.launchcode.techjobs.oo;
 
 import java.util.Objects;
 
-public class CoreCompetency {
+public class CoreCompetency extends JobField{
 
+    /*
     private int id;
     private static int nextId = 1;
     private String value;
@@ -13,9 +14,21 @@ public class CoreCompetency {
         nextId++;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
     public CoreCompetency(String value) {
         this();
-        this.value = value;
+        this.value = value.isBlank()?"Data not available":value;
     }
 
     // Custom toString, equals, and hashCode methods:
@@ -40,5 +53,8 @@ public class CoreCompetency {
 
     // TODO: Use the "Generate" tool to add a getter and setter for the 'value' field but
     //  ONLY a getter for the 'id' field.
-
+*/
+    public CoreCompetency(String value) {
+        super(value);
+    }
 }
